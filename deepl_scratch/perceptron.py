@@ -1,9 +1,16 @@
+import abc
 import numpy as np
 
 from .activation_function import step_function
 
 
-class Perceptron:
+class IPerceptron(metaclass=abc.ABCMeta):
+    @abc.abstractmethod
+    def out(self, x1: int, x2: int) -> int:
+        raise NotImplementedError()
+
+
+class Perceptron(IPerceptron):
     def __init__(self, weight, bias):
         self.weight = weight
         self.bias = bias
@@ -39,7 +46,7 @@ class OrGate(Perceptron):
         return super().out(x1, x2)
 
 
-class XorGate:
+class XorGate(IPerceptron):
     def __init__(self):
         self.and_gate = AndGate()
         self.nand_gate = NandGate()
