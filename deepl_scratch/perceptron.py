@@ -1,5 +1,7 @@
 import numpy as np
 
+from .activation_function import step_function
+
 
 class Perceptron:
     def __init__(self, weight, bias):
@@ -9,10 +11,8 @@ class Perceptron:
     def out(self, x1, x2):
         x = np.array([x1, x2])
         w = np.array([self.weight, self.weight])
-        tmp = np.sum(w * x) + self.bias
-        if tmp <= 0:
-            return 0
-        return 1
+        y = np.sum(w * x) + self.bias
+        return step_function(y)
 
 
 class AndGate(Perceptron):
